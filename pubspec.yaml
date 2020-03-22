@@ -1,6 +1,6 @@
 name: fileaudioplayer
 description: Audio player for local files with ducking support
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/tapeo/file_audio_player
 
 environment:

@@ -1,3 +1,8 @@
-## 0.0.1
+## 0.0.3
+* added missing classes
 
-* TODO: Describe initial release.
+## 0.0.2
+* update repo
+
+## 0.0.1
+* initial release

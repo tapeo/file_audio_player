@@ -1,8 +1,7 @@
 name: fileaudioplayer
-description: Audio player for local files
+description: Audio player for local files with ducking support
 version: 0.0.1
-author: Matteo Ricupero
-homepage: https://matteoricupero.it
+homepage: https://github.com/tapeo/file_audio_player
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

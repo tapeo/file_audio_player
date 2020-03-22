@@ -19,8 +19,13 @@ public class SwiftFileaudioplayerPlugin: NSObject, FlutterPlugin, AVAudioPlayerD
         let action = call.method
         
         if (action == "start") {
-            let url : String = call.arguments as! String
-            start(filePath : url)
+            if (call.arguments != nil){
+                let url : String = call.arguments as! String
+                start(filePath : url)
+            } else {
+                print("no file")
+                self.flutterResult!(false)
+            }
         } else if (action == "stop") {
             stop()
         } else if (action == "pause") {
@@ -33,17 +38,22 @@ public class SwiftFileaudioplayerPlugin: NSObject, FlutterPlugin, AVAudioPlayerD
     private func start(filePath: String){
         let url = URL(string: filePath)
         
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .duckOthers)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            try audioPlayer = AVAudioPlayer(contentsOf: url!, fileTypeHint: AVFileType.wav.rawValue)
-            
-            audioPlayer!.delegate = self
-            
-            audioPlayer!.play()
-        } catch {
-            print("start error: \(error)")
+        if (url != nil){
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: .duckOthers)
+                try AVAudioSession.sharedInstance().setActive(true)
+
+                try audioPlayer = AVAudioPlayer(contentsOf: url!, fileTypeHint: AVFileType.wav.rawValue)
+
+                audioPlayer!.delegate = self
+
+                audioPlayer!.play()
+            } catch {
+                print("start error: \(error)")
+                self.flutterResult!(false)
+            }
+        } else {
+            print("url null")
             self.flutterResult!(false)
         }
         

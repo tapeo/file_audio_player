@@ -1,6 +1,6 @@
 name: fileaudioplayer
 description: Audio player for local files. This plugin have ducking support to reduce the main audio volume while playing background music
-version: 0.0.5
+version: 0.0.8
 homepage: https://github.com/tapeo/file_audio_player
 
 environment:

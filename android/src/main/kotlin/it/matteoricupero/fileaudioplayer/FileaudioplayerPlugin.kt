@@ -53,9 +53,13 @@ public class FileaudioplayerPlugin: FlutterPlugin, MethodCallHandler {
 
     when (action) {
       "start" -> {
-        val url = call.arguments.toString()
-        initializePlayer(url)
-        startPlayer()
+        if (call.arguments != null) {
+          val url = call.arguments.toString()
+          initializePlayer(url)
+          startPlayer()
+        } else {
+          result.error("no file", null, null)
+        }
       }
       "stop" -> stopPlayer()
       "pause" -> pausePlayer()

@@ -74,23 +74,24 @@ public class FileaudioplayerPlugin: FlutterPlugin, MethodCallHandler {
   private fun initializePlayer(url: String) {
     try {
       if (player != null) {
-        player!!.stop()
-        player!!.reset()
-        player!!.release()
+        player?.stop()
+        player?.reset()
+        player?.release()
+        player = null
       }
 
       player = MediaPlayer()
 
       if (VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        player!!.setAudioAttributes(AudioAttributes.Builder()
+        player?.setAudioAttributes(AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build())
       } else {
-        player!!.setAudioStreamType(AudioManager.STREAM_SYSTEM)
+        player?.setAudioStreamType(AudioManager.STREAM_SYSTEM)
       }
 
-      player!!.setDataSource(url)
+      player?.setDataSource(url)
 
     } catch (e: IllegalArgumentException) {
       e.printStackTrace()
@@ -105,15 +106,15 @@ public class FileaudioplayerPlugin: FlutterPlugin, MethodCallHandler {
     try {
       if (player != null) {
         requestFocus()
-        player!!.prepareAsync()
-        player!!.setOnPreparedListener {
+        player?.prepareAsync()
+        player?.setOnPreparedListener {
           try {
-            player!!.start()
+            player?.start()
           } catch (e: IllegalStateException) {
             afterException(e)
           }
         }
-        player!!.setOnCompletionListener {
+        player?.setOnCompletionListener {
           try {
             abandonFocus()
             result.success(true)
@@ -161,9 +162,10 @@ public class FileaudioplayerPlugin: FlutterPlugin, MethodCallHandler {
     try {
       if (player != null) {
         abandonFocus()
-        player!!.stop()
-        player!!.reset()
-        player!!.release()
+        player?.stop()
+        player?.reset()
+        player?.release()
+        player = null
       }
       result.success(true)
     } catch (e: Exception) {
@@ -175,7 +177,7 @@ public class FileaudioplayerPlugin: FlutterPlugin, MethodCallHandler {
     try {
       if (player!!.isPlaying) {
         abandonFocus()
-        player!!.pause()
+        player?.pause()
       }
       result.success(true)
     } catch (e: Exception) {
@@ -185,9 +187,9 @@ public class FileaudioplayerPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun resumePlayer() {
     try {
-      if (!player!!.isPlaying) {
+      if (player != null && !player!!.isPlaying) {
         abandonFocus()
-        player!!.start()
+        player?.start()
       }
       result.success(true)
     } catch (e: Exception) {

@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Fileaudioplayer player = new Fileaudioplayer();
+  FileAudioPlayer player = new FileAudioPlayer();
 
   @override
   Widget build(BuildContext context) {

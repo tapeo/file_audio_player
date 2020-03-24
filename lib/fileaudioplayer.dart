@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-class Fileaudioplayer {
+class FileAudioPlayer {
   static const MethodChannel _channel = const MethodChannel('fileaudioplayer');
 
-  Fileaudioplayer();
+  FileAudioPlayer();
 
   Future<void> start(String path) async {
     try {

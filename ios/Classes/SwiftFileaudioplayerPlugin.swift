@@ -63,7 +63,7 @@ public class SwiftFileaudioplayerPlugin: NSObject, FlutterPlugin, AVAudioPlayerD
         audioPlayer?.stop()
         
         do {
-            try AVAudioSession.sharedInstance().setActive(false)
+            try AVAudioSession.sharedInstance().setActive(false,options: .notifyOthersOnDeactivation)
             self.flutterResult!(true)
         } catch {
             print("AVAudioSession stop error: \(error)")
@@ -100,7 +100,7 @@ public class SwiftFileaudioplayerPlugin: NSObject, FlutterPlugin, AVAudioPlayerD
     
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         do {
-            try AVAudioSession.sharedInstance().setActive(false)
+            try AVAudioSession.sharedInstance().setActive(false,options: .notifyOthersOnDeactivation)
             self.flutterResult!(true)
         } catch {
             print("AVAudioSession audioPlayerDidFinishPlaying error: \(error)")
